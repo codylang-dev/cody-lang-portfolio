@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cody Lang — Web Developer</title>
+  <meta name="description" content="Austin-based freelance web developer helping local businesses get online fast." />
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --blue: #2563eb;
+      --dark: #0f172a;
+      --gray: #64748b;
+      --light: #f8fafc;
+      --border: #e2e8f0;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      color: var(--dark);
+      background: #fff;
+      line-height: 1.6;
+    }
+    a { color: var(--blue); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* NAV */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.25rem 2rem;
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(8px);
+      z-index: 100;
+    }
+    .logo { font-weight: 700; font-size: 1.1rem; letter-spacing: -0.5px; }
+    .logo span { color: var(--blue); }
+    nav ul { list-style: none; display: flex; gap: 2rem; }
+    nav ul li a { color: var(--gray); font-size: 0.9rem; font-weight: 500; }
+    nav ul li a:hover { color: var(--dark); text-decoration: none; }
+    .nav-cta {
+      background: var(--blue);
+      color: #fff !important;
+      padding: 0.5rem 1.2rem;
+      border-radius: 6px;
+      font-weight: 600 !important;
+    }
+    .nav-cta:hover { background: #1d4ed8; }
+
+    /* HERO */
+    .hero {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 5rem 2rem 4rem;
+      text-align: center;
+    }
+    .badge {
+      display: inline-block;
+      background: #eff6ff;
+      color: var(--blue);
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 0.3rem 0.8rem;
+      border-radius: 20px;
+      margin-bottom: 1.5rem;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+    h1 {
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 800;
+      letter-spacing: -1px;
+      line-height: 1.15;
+      margin-bottom: 1.25rem;
+    }
+    h1 em { font-style: normal; color: var(--blue); }
+    .hero p {
+      font-size: 1.15rem;
+      color: var(--gray);
+      max-width: 520px;
+      margin: 0 auto 2.5rem;
+    }
+    .cta-group { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--blue);
+      color: #fff;
+      padding: 0.8rem 1.8rem;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 1rem;
+      border: none;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .btn-primary:hover { background: #1d4ed8; text-decoration: none; }
+    .btn-secondary {
+      background: var(--light);
+      color: var(--dark);
+      padding: 0.8rem 1.8rem;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 1rem;
+      border: 1px solid var(--border);
+    }
+    .btn-secondary:hover { background: #f1f5f9; text-decoration: none; }
+
+    /* SOCIAL PROOF */
+    .proof { text-align: center; padding: 1.5rem 2rem; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); color: var(--gray); font-size: 0.9rem; }
+    .proof strong { color: var(--dark); }
+
+    /* SECTION */
+    section { padding: 5rem 2rem; }
+    .container { max-width: 960px; margin: 0 auto; }
+    .section-label { text-transform: uppercase; font-size: 0.75rem; font-weight: 700; color: var(--blue); letter-spacing: 1px; margin-bottom: 0.5rem; }
+    h2 { font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 800; letter-spacing: -0.5px; margin-bottom: 1rem; }
+    .subtitle { color: var(--gray); font-size: 1.05rem; margin-bottom: 3rem; }
+
+    /* WORK */
+    .work-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; }
+    .card {
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+    .card:hover { box-shadow: 0 8px 32px rgba(0,0,0,0.1); transform: translateY(-2px); }
+    .card-img {
+      height: 160px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+    }
+    .card-body { padding: 1.25rem; }
+    .card-tag { font-size: 0.75rem; color: var(--gray); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.4rem; }
+    .card-title { font-weight: 700; font-size: 1rem; margin-bottom: 0.5rem; }
+    .card-desc { font-size: 0.9rem; color: var(--gray); }
+
+    /* ABOUT */
+    #about { background: var(--light); }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+    @media (max-width: 640px) { .about-grid { grid-template-columns: 1fr; } }
+    .about-avatar {
+      width: 180px; height: 180px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #2563eb, #7c3aed);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 5rem;
+      margin: 0 auto;
+    }
+    .skills { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.5rem; }
+    .skill-pill {
+      background: #fff;
+      border: 1px solid var(--border);
+      padding: 0.35rem 0.9rem;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 500;
+    }
+
+    /* SERVICES */
+    .services-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1.5rem; }
+    .service-card { padding: 1.5rem; border: 1px solid var(--border); border-radius: 12px; }
+    .service-icon { font-size: 2rem; margin-bottom: 0.75rem; }
+    .service-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 0.5rem; }
+    .service-card p { font-size: 0.9rem; color: var(--gray); }
+
+    /* CONTACT */
+    #contact { background: var(--dark); color: #fff; text-align: center; }
+    #contact h2 { color: #fff; }
+    #contact p { color: #94a3b8; margin-bottom: 2rem; }
+    .contact-email {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #60a5fa;
+    }
+    .contact-meta { color: #94a3b8; font-size: 0.9rem; margin-top: 0.5rem; }
+
+    /* FOOTER */
+    footer { text-align: center; padding: 1.5rem; font-size: 0.85rem; color: var(--gray); border-top: 1px solid var(--border); }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">Cody<span>Lang</span></div>
+  <ul>
+    <li><a href="#work">Work</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#contact" class="nav-cta">Contact</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <div class="badge">✦ Freelance Web Developer</div>
+  <h1>Your business deserves a website that <em>actually works</em></h1>
+  <p>I build fast, professional sites for local businesses — from zero to live in under 7 days. Based in Austin, TX.</p>
+  <div class="cta-group">
+    <a href="#contact" class="btn-primary">Get a free mockup</a>
+    <a href="#work" class="btn-secondary">See my work</a>
+  </div>
+</section>
+
+<div class="proof">
+  <strong>6 businesses</strong> launched in the last 3 months · Average time to live: <strong>5 days</strong> · Starting at <strong>$299</strong>
+</div>
+
+<!-- WORK -->
+<section id="work">
+  <div class="container">
+    <div class="section-label">Portfolio</div>
+    <h2>Recent Projects</h2>
+    <p class="subtitle">Local businesses, real results — each site built from scratch and live within a week.</p>
+    <div class="work-grid">
+      <div class="card">
+        <div class="card-img" style="background:#eff6ff;">🔧</div>
+        <div class="card-body">
+          <div class="card-tag">Plumbing · Austin, TX</div>
+          <div class="card-title">Star Plumbing Co.</div>
+          <div class="card-desc">Landing page with booking form, Google Maps embed, and 5-star review display. Up in 4 days.</div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-img" style="background:#f0fdf4;">🌿</div>
+        <div class="card-body">
+          <div class="card-tag">Landscaping · Round Rock, TX</div>
+          <div class="card-title">Green Edge Lawn</div>
+          <div class="card-desc">Service menu, photo gallery, and quote request form. Replaced a Facebook page.</div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-img" style="background:#fdf4ff;">💇</div>
+        <div class="card-body">
+          <div class="card-tag">Salon · Austin, TX</div>
+          <div class="card-title">Marisol Hair Studio</div>
+          <div class="card-desc">Online booking integration, service menu with pricing, Instagram feed embed.</div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-img" style="background:#fff7ed;">🍕</div>
+        <div class="card-body">
+          <div class="card-tag">Restaurant · Kyle, TX</div>
+          <div class="card-title">Sal's Pizza Kitchen</div>
+          <div class="card-desc">Digital menu, hours, directions, and online order link. Mobile-first design.</div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-img" style="background:#f0f9ff;">❄️</div>
+        <div class="card-body">
+          <div class="card-tag">HVAC · Georgetown, TX</div>
+          <div class="card-title">Cool Breeze HVAC</div>
+          <div class="card-desc">Emergency contact CTA, service area map, and seasonal promo banners.</div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-img" style="background:#fefce8;">🐾</div>
+        <div class="card-body">
+          <div class="card-tag">Pet Services · Austin, TX</div>
+          <div class="card-title">Pawsome Grooming</div>
+          <div class="card-desc">Appointment scheduler, pricing table, and before/after photo gallery.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div>
+        <div class="about-avatar">👨‍💻</div>
+      </div>
+      <div>
+        <div class="section-label">About</div>
+        <h2>Hey, I'm Cody.</h2>
+        <p style="color: var(--gray); margin-bottom: 1rem;">
+          I'm a freelance developer based in Austin who specializes in getting local businesses online — fast and without the agency markup.
+        </p>
+        <p style="color: var(--gray); margin-bottom: 1rem;">
+          Most of my clients are businesses with great reputations (tons of Google reviews!) but no website. I find them, build a site, and show them the live link. No risk, no pitch decks.
+        </p>
+        <p style="color: var(--gray);">
+          If you're running a business on referrals and Facebook alone, let's fix that.
+        </p>
+        <div class="skills">
+          <span class="skill-pill">HTML / CSS</span>
+          <span class="skill-pill">JavaScript</span>
+          <span class="skill-pill">React</span>
+          <span class="skill-pill">Vercel</span>
+          <span class="skill-pill">SEO</span>
+          <span class="skill-pill">Mobile-First</span>
+          <span class="skill-pill">Google Analytics</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="container">
+    <div class="section-label">Services</div>
+    <h2>What I build</h2>
+    <p class="subtitle">Everything a local business needs to look legit online.</p>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-icon">🚀</div>
+        <h3>Launch Site — $299</h3>
+        <p>A clean 1-page site with your info, services, and contact form. Live in 3 days. Perfect for businesses starting from zero.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">📱</div>
+        <h3>Full Website — $599</h3>
+        <p>Multi-page site with gallery, service menu, booking form, and SEO basics. Live in 7 days.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">⚡</div>
+        <h3>Express — $149</h3>
+        <p>A simple "we're open" landing page with your hours, phone, and location. Up in 24 hours.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🔧</div>
+        <h3>Maintenance — $49/mo</h3>
+        <p>Updates, hosting, backups, and tweaks. I keep it running so you don't have to think about it.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container">
+    <div class="section-label" style="color: #60a5fa;">Get in touch</div>
+    <h2>Ready to get your business online?</h2>
+    <p>I'll build you a free mockup first — no commitment, no deposit. If you like it, we go from there.</p>
+    <div class="contact-email">
+      <a href="mailto:codylang455@proton.me" style="color: #60a5fa;">codylang455@proton.me</a>
+    </div>
+    <div class="contact-meta">Based in Austin, TX · Usually responds within a few hours</div>
+  </div>
+</section>
+
+<footer>
+  © 2026 Cody Lang · Freelance Web Developer · Austin, TX
+</footer>
+
+</body>
+</html>
